@@ -948,7 +948,7 @@ class RoboWorker(QThread):
         ''' This function grips and drops figures
         if grip == True than pick figure
         else drops it '''
-        if self.Spechial!=2:
+        if self.Spechial!=2 and  self.Spechial!=6:
             if self.player==0:
                 z = dataStructers.playerOneLPose
             elif self.player==1:
@@ -981,7 +981,7 @@ class RoboWorker(QThread):
             #pose[2] +=dataStructers.figureGripStruc[figure]
             self.robot.movel (defPose, self.acc, self.vel)
        
-        elif self.Spechial ==2:
+        elif self.Spechial ==2 or self.Spechial ==6:
             if grip:
                 if self.valrs==True:
                     z = dataStructers.playerOneLPose.copy()
@@ -1119,7 +1119,7 @@ class RoboWorker(QThread):
                         index = -1
                         for j in range(figureOnBoard[1]):
                             index =  _currentBoardList.index(figureOnBoard[0],index+1)
-                            print('JIter is',j,' | Iteration',i,' | figure is',figureOnBoard[0],'| index ',index)
+                            #print('JIter is',j,' | Iteration',i,' | figure is',figureOnBoard[0],'| index ',index)
                             
                             if _defBoardList[index]==figureOnBoard[0]:
                                 tmp+=1
