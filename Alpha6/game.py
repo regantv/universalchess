@@ -651,17 +651,17 @@ class MainGame(QWidget):
     def CorrectBaseOne(self):
         
         restartThread = CheckBoard(0,'',self.robot,self.camera,3)
-        self.robot.set_digital_out(dataStructers.OutButton[0], True)
+        self.robot.set_digital_out(dataStructers.OutButtonOne, True)
         restartThread.start()   
     def CorrectBaseTwo(self):
         
         restartThread = CheckBoard(1,'',self.robot,self.camera,3)
-        self.robot.set_digital_out(dataStructers.OutButton[1], True)
+        self.robot.set_digital_out(dataStructers.OutButtonTwo, True)
         restartThread.start()   
     def CorrectBaseThree(self):
         
         restartThread = CheckBoard(2,'',self.robot,self.camera,3)
-        self.robot.set_digital_out(dataStructers.OutButton[2], True)
+        self.robot.set_digital_out(dataStructers.OutButtonThree, True)
         restartThread.start()   
         
     
@@ -763,11 +763,11 @@ class MainGame(QWidget):
     def ButtonPushed(self,player):
         self.CheckPermission[player]=True
     def checkButtons(self):
-        if self.robot.get_digital_in(dataStructers.InButton[0]) == True:
+        if self.robot.get_digital_in(dataStructers.InButtonOne) == True:
             self.CheckPermission[0]=True
-        elif self.robot.get_digital_in(dataStructers.InButton[1]) == True:
+        elif self.robot.get_digital_in(dataStructers.InButtonTwo) == True:
             self.CheckPermission[1]=True
-        elif self.robot.get_digital_in(dataStructers.InButton[2]) == True:
+        elif self.robot.get_digital_in(dataStructers.InButtonThree) == True:
             self.CheckPermission[2]=True  
     #def EmitSignal(self,event,signal, value):
     #    buttonCheckEvent = event

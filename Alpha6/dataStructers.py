@@ -106,16 +106,16 @@ acc = 0.8
 sleep = 0.2
 
 #inputs
-InButton[0] = 2
-InButton[1] = 3
-InButton[2] = 4
+InButtonOne = 2
+InButtonTwo = 3
+InButtonThree = 4
 
 #outputs
 OutGrip = 0
 led_flash = 1
-OutButton[0] = 2
-OutButton[1] = 3
-OutButton[2] = 4
+OutButtonOne = 2
+OutButtonTwo = 3
+OutButtonThree = 4
 led_blue = 5
 led_red = 6
 #last free slot output 7
