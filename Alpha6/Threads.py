@@ -698,16 +698,12 @@ class RoboWorker(QThread):
                 
         if self.player ==1:
             
-            if curPose[0] >=dataStructers.playerTwoJleftLimit and curPose[0]<=dataStructers.playerTwoJrightLimit:
-                pass
-            else:
+            
                 self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
                 
         if self.player ==2:
             
-            if curPose[0] >=dataStructers.playerThreeJleftLimit and curPose[0]<=dataStructers.playerThreeJrightLimit:
-                pass
-            else:
+           
                 self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
         
     
@@ -815,8 +811,18 @@ class RoboWorker(QThread):
             #z = dataStructers.figuresDropOneWhite.copy()
             #position[2]+= z[2] - dataStructers.figureGripStruc[figure]
             position[2]+= 0.1
-            position[0]+= dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
-            position[1]+= dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+            if self.player==0:
+            
+                position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            
+            elif self.player==1:
+                position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]-= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            elif self.player==2:
+                position[0]-= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            
             #print('position',position)
             self.robot.movel(position,self.acc,self.vel)
             #self.GripFigure(figure,False) 
@@ -841,8 +847,18 @@ class RoboWorker(QThread):
             #z = dataStructers.figuresDropOneWhite.copy()
             #position[2]+= z[2] - dataStructers.figureGripStruc[figure]
             position[2]+= 0.1
-            position[0]+= dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
-            position[1]+= dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+            if self.player==0:
+            
+                position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            
+            elif self.player==1:
+                position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]-= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            elif self.player==2:
+                position[0]-= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            
             #print('position',position)
             self.robot.movel(position,self.acc,self.vel)
             #self.GripFigure(figure,False)
@@ -869,8 +885,18 @@ class RoboWorker(QThread):
             #z = dataStructers.figuresDropOneBlack.copy()
             #position[2]+= z[2] - dataStructers.figureGripStruc[figure]
             position[2]+= 0.1
-            position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
-            position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            if self.player==0:
+            
+                position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            
+            elif self.player==1:
+                position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]-= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            elif self.player==2:
+                position[0]-= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            
             #print('position',position)
             self.robot.movel(position,self.acc,self.vel)
             #self.GripFigure(figure,False)
@@ -896,8 +922,21 @@ class RoboWorker(QThread):
             #z = dataStructers.figuresDropOneBlack.copy()
             #position[2]+= z[2] - dataStructers.figureGripStruc[figure]
             position[2]+= 0.1
-            position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
-            position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            if self.player==0:
+            
+                position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            
+            elif self.player==1:
+                position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]-= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            elif self.player==2:
+                position[0]-= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            
+            #position[2]+= 0.1
+            #position[0]+= dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+            #position[1]+= dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             #print('position',position)
             self.robot.movel(position,self.acc,self.vel)
             #self.GripFigure(figure,False)
