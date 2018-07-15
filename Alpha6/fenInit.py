@@ -8,10 +8,10 @@ import numpy as np
 import sys
 
 class InitScreen(QDialog):
-    def __init__(self):
+    def __init__(self,robot):
         
         super().__init__()
-        #self.robot = robot
+        self.robot = robot
         self.isCheckedOne=False
         self.isCheckedTwo=False
         self.isCheckedThree=False
@@ -99,6 +99,6 @@ class InitScreen(QDialog):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     robot = []
-    ex = InitScreen()
+    ex = InitScreen(robtot)
     
     sys.exit(app.exec_())
