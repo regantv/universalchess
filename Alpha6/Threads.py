@@ -507,7 +507,7 @@ class CheckBoard(QThread):
                     self.robot.set_digital_out(dataStructers.led_red, True)
                     self.result.emit(data)
             
-
+        self.robot.set_digital_out(1,False)
         
                 
 class DrawThread(QThread):
