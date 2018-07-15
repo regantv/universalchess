@@ -414,8 +414,8 @@ class MainGame(QWidget):
             Player has made a move, need to push board
             
             '''
-            self.robot.set_digital_out(4,False)
             self.robot.set_digital_out(5,False)
+            self.robot.set_digital_out(6,False)
             filename = 'player'+str(player)+'.txt'
             file = open(filename,'w')
             a = data[2:data.find('-')]
@@ -462,8 +462,8 @@ class MainGame(QWidget):
     def LoopThreadDone(self):
         
         currentPlayer = self.curPlayer[0]
-        self.robot.set_digital_out(4,False)
         self.robot.set_digital_out(5,False)
+        self.robot.set_digital_out(6,False)
         self.CheckPermission[currentPlayer]=False
         
         
@@ -514,8 +514,8 @@ class MainGame(QWidget):
             if self.playerStatus[currentPlayer][1]:
                 if self.playerStatus[currentPlayer][0].is_check():
                 
-                    self.robot.set_digital_out(4,True)
                     self.robot.set_digital_out(5,True)
+                    self.robot.set_digital_out(6,True)
            
             
             if BoardTurn(prevBoard) =='w':
@@ -621,7 +621,7 @@ class MainGame(QWidget):
                             gameThread = GameLoop(self.playerStatus[currentPlayer][0],self.playerStatus[currentPlayer][2],self.engine,currentPlayer)
                             gameThread.dataSignal[str].connect(self.GainDataFromThread)
                             gameThread.doneSignal[int].connect(self.LoopThreadDone)
-                            self.robot.set_digital_out(4,True)
+                            self.robot.set_digital_out(5,True)
                             if gameThread.isFinished:
                                 gameThread.start()
                             
@@ -635,6 +635,7 @@ class MainGame(QWidget):
                             gameThread1 = GameLoop(self.playerStatus[currentPlayer][0],self.playerStatus[currentPlayer][3],self.engine,currentPlayer)
                             gameThread1.dataSignal[str].connect(self.GainDataFromThread)
                             gameThread1.doneSignal[int].connect(self.LoopThreadDone)
+                            self.robot.set_digital_out(5,True)
                             if gameThread1.isFinished:
                                 gameThread1.start()
                             self.robot.set_digital_out(2+currentPlayer,False)
