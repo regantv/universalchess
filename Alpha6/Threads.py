@@ -1324,6 +1324,7 @@ class RoboWorker(QThread):
             self.CastlingMove()
             if BoardTurn(self.moveBoards[1]) =='w':
                         makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
+                        makePhoto.MoveToZero(1)
                         makePhoto.MakePhoto(1)
                         makePhoto.MakePhoto(2)
                         #makePhoto.MoveToZero(2)
@@ -1344,6 +1345,7 @@ class RoboWorker(QThread):
             self.MoveToZero()
             if BoardTurn(self.moveBoards[1]) =='w':
                 makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
+                makePhoto.MoveToZero(1)
                 makePhoto.MakePhoto(1)
                 makePhoto.MakePhoto(2)
         elif self.Spechial == 5:
@@ -1351,6 +1353,7 @@ class RoboWorker(QThread):
             self.MoveToZero()
             if BoardTurn(self.moveBoards[1]) =='w':
                 makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
+                makePhoto.MoveToZero(1)
                 makePhoto.MakePhoto(1)
                 makePhoto.MakePhoto(2)
             
