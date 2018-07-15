@@ -95,3 +95,27 @@ picStruct = {'r':cv2.resize(cv2.imread('images/Chess_tile_rd.png'),(50,50)),
              'P':cv2.resize(cv2.imread('images/Chess_tile_pl.png'),(50,50))}
 chessboard_squareX = 0.04
 chessboard_squareY = 0.04
+
+dropboard_squareX = 0.036
+dropboard_squareY = 0.036
+
+#robot speed
+vel = 0.8
+acc = 0.8
+#robot sleep after move
+sleep = 0.2
+
+#inputs
+InButton[0] = 2
+InButton[1] = 3
+InButton[2] = 4
+
+#outputs
+OutGrip = 0
+led_flash = 1
+OutButton[0] = 2
+OutButton[1] = 3
+OutButton[2] = 4
+led_blue = 5
+led_red = 6
+#last free slot output 7
