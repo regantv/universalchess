@@ -70,24 +70,18 @@ class MainGame(QWidget):
     def connect2Robot(self):
             self.robot = urx.Robot("192.168.0.20", use_rt=True)
             print(self.robot)
-            self.robot.set_digital_out(0, False)
-            self.robot.set_digital_out(1, False)
-            self.robot.set_digital_out(2, False)
-            self.robot.set_digital_out(3, False)
-            self.robot.set_digital_out(4, False)
-            self.robot.set_digital_out(5, False)
-            self.robot.set_digital_out(6, False)
-            self.robot.set_digital_out(7, False)
+            for i in range(7):
+                self.robot.set_digital_out(i, False)
             return(self.robot)
     
 #     def ButtonLed(self, GenerateMoveDone, robot):
 #         if GenerateMoveDone[0]==True:
-#             self.robot.set_digital_out(1, True)
+#             self.robot.set_digital_out(dataStructers.led_flash, True)
 #             
 #             if self.robot.get_digital_in(0) == True:
 #                 
 #         else:
-#             self.robot.set_digital_our(1, False)
+#             self.robot.set_digital_out(dataStructers.led_flash, False)
             
             
     def InitUI(self,old): 
@@ -114,7 +108,7 @@ class MainGame(QWidget):
                 if self.players[i]==True:
                     self.playerNamesLabels[i].setText("Player \nPlayer "+str(i+1))
                 else:
-                    self.playerNamesLabels[i].setText("Player \n Ai:"+str(self.aiDifficulties[i]))
+                    self.playerNamesLabels[i].setTetx("Player \n Ai:"+str(self.aiDifficulties[i]))
                 self.playerNamesLabels[i].resize(80,40)
                 self.playerNamesLabels[i].move(4+500*i,0)
                 
@@ -414,8 +408,8 @@ class MainGame(QWidget):
             Player has made a move, need to push board
             
             '''
-            self.robot.set_digital_out(5,False)
-            self.robot.set_digital_out(6,False)
+            self.robot.set_digital_out(dataStructers.led_red,False)
+            self.robot.set_digital_out(dataStructers.led_blue,False)
             filename = 'player'+str(player)+'.txt'
             file = open(filename,'w')
             a = data[2:data.find('-')]
@@ -462,8 +456,8 @@ class MainGame(QWidget):
     def LoopThreadDone(self):
         
         currentPlayer = self.curPlayer[0]
-        self.robot.set_digital_out(5,False)
-        self.robot.set_digital_out(6,False)
+        self.robot.set_digital_out(dataStructers.led_red,False)
+        self.robot.set_digital_out(dataStructers.led_blue,False)
         self.CheckPermission[currentPlayer]=False
         
         
@@ -514,8 +508,8 @@ class MainGame(QWidget):
             if self.playerStatus[currentPlayer][1]:
                 if self.playerStatus[currentPlayer][0].is_check():
                 
-                    self.robot.set_digital_out(5,True)
-                    self.robot.set_digital_out(6,True)
+                    self.robot.set_digital_out(dataStructers.led_red,True)
+                    self.robot.set_digital_out(dataStructers.led_blue,True)
            
             
             if BoardTurn(prevBoard) =='w':
@@ -621,7 +615,7 @@ class MainGame(QWidget):
                             gameThread = GameLoop(self.playerStatus[currentPlayer][0],self.playerStatus[currentPlayer][2],self.engine,currentPlayer)
                             gameThread.dataSignal[str].connect(self.GainDataFromThread)
                             gameThread.doneSignal[int].connect(self.LoopThreadDone)
-                            self.robot.set_digital_out(5,True)
+                            self.robot.set_digital_out(dataStructers.led_blue,True)
                             if gameThread.isFinished:
                                 gameThread.start()
                             
@@ -635,7 +629,7 @@ class MainGame(QWidget):
                             gameThread1 = GameLoop(self.playerStatus[currentPlayer][0],self.playerStatus[currentPlayer][3],self.engine,currentPlayer)
                             gameThread1.dataSignal[str].connect(self.GainDataFromThread)
                             gameThread1.doneSignal[int].connect(self.LoopThreadDone)
-                            self.robot.set_digital_out(5,True)
+                            self.robot.set_digital_out(dataStructers.led_blue,True)
                             if gameThread1.isFinished:
                                 gameThread1.start()
                             self.robot.set_digital_out(2+currentPlayer,False)
@@ -657,17 +651,17 @@ class MainGame(QWidget):
     def CorrectBaseOne(self):
         
         restartThread = CheckBoard(0,'',self.robot,self.camera,3)
-        self.robot.set_digital_out(2, True)
+        self.robot.set_digital_out(dataStructers.OutButton[0], True)
         restartThread.start()   
     def CorrectBaseTwo(self):
         
         restartThread = CheckBoard(1,'',self.robot,self.camera,3)
-        self.robot.set_digital_out(3, True)
+        self.robot.set_digital_out(dataStructers.OutButton[1], True)
         restartThread.start()   
     def CorrectBaseThree(self):
         
         restartThread = CheckBoard(2,'',self.robot,self.camera,3)
-        self.robot.set_digital_out(4, True)
+        self.robot.set_digital_out(dataStructers.OutButton[2], True)
         restartThread.start()   
         
     
@@ -769,11 +763,11 @@ class MainGame(QWidget):
     def ButtonPushed(self,player):
         self.CheckPermission[player]=True
     def checkButtons(self):
-        if self.robot.get_digital_in(2) == True:
+        if self.robot.get_digital_in(dataStructers.InButton[0]) == True:
             self.CheckPermission[0]=True
-        elif self.robot.get_digital_in(3) == True:
+        elif self.robot.get_digital_in(dataStructers.InButton[1]) == True:
             self.CheckPermission[1]=True
-        elif self.robot.get_digital_in(4) == True:
+        elif self.robot.get_digital_in(dataStructers.InButton[2]) == True:
             self.CheckPermission[2]=True  
     #def EmitSignal(self,event,signal, value):
     #    buttonCheckEvent = event
