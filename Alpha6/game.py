@@ -538,7 +538,7 @@ class MainGame(QWidget):
             
             
             currentPlayer = self.curPlayer[0]
-            self.Draw(self.playerStatus[currentPlayer][0],currentPlayer)
+            #self.Draw(self.playerStatus[currentPlayer][0],currentPlayer)
             #print('Run gameloop')
             #print('Current turn',BoardTurn(self.playerStatus[self.curPlayer[0]][0]))
             
@@ -650,7 +650,7 @@ class MainGame(QWidget):
                
             
             
-            self.Draw(self.playerStatus[currentPlayer][0],currentPlayer)    
+            #self.Draw(self.playerStatus[currentPlayer][0],currentPlayer)    
                 
             
             
