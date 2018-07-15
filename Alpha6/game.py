@@ -32,13 +32,13 @@ class MainGame(QWidget):
         self.debug = debug
         self.camera = cv2.VideoCapture(id)
          
-        #try:
-        #     while True:
-        #         done = self.connect2Robot()
-        #         if type(done)!='None':
-        #             break
-        #except TimeoutException:
-        #    pass
+        try:
+             while True:
+                 done = self.connect2Robot()
+                 if type(done)!='None':
+                     break
+        except TimeoutException:
+            pass
           
         if  self.debug:
             self.debug = debug
@@ -108,7 +108,7 @@ class MainGame(QWidget):
                 if self.players[i]==True:
                     self.playerNamesLabels[i].setText("Player \nPlayer "+str(i+1))
                 else:
-                    self.playerNamesLabels[i].setTetx("Player \n Ai:"+str(self.aiDifficulties[i]))
+                    self.playerNamesLabels[i].setText("Player \n Ai:"+str(self.aiDifficulties[i]))
                 self.playerNamesLabels[i].resize(80,40)
                 self.playerNamesLabels[i].move(4+500*i,0)
                 
@@ -651,17 +651,17 @@ class MainGame(QWidget):
     def CorrectBaseOne(self):
         
         restartThread = CheckBoard(0,'',self.robot,self.camera,3)
-        self.robot.set_digital_out(dataStructers.OutButton[0], True)
+        self.robot.set_digital_out(dataStructers.OutButtonOne, True)
         restartThread.start()   
     def CorrectBaseTwo(self):
         
         restartThread = CheckBoard(1,'',self.robot,self.camera,3)
-        self.robot.set_digital_out(dataStructers.OutButton[1], True)
+        self.robot.set_digital_out(dataStructers.OutButtonTwo, True)
         restartThread.start()   
     def CorrectBaseThree(self):
         
         restartThread = CheckBoard(2,'',self.robot,self.camera,3)
-        self.robot.set_digital_out(dataStructers.OutButton[2], True)
+        self.robot.set_digital_out(dataStructers.OutButtonThree, True)
         restartThread.start()   
         
     
@@ -763,11 +763,11 @@ class MainGame(QWidget):
     def ButtonPushed(self,player):
         self.CheckPermission[player]=True
     def checkButtons(self):
-        if self.robot.get_digital_in(dataStructers.InButton[0]) == True:
+        if self.robot.get_digital_in(dataStructers.InButtonOne) == True:
             self.CheckPermission[0]=True
-        elif self.robot.get_digital_in(dataStructers.InButton[1]) == True:
+        elif self.robot.get_digital_in(dataStructers.InButtonTwo) == True:
             self.CheckPermission[1]=True
-        elif self.robot.get_digital_in(dataStructers.InButton[2]) == True:
+        elif self.robot.get_digital_in(dataStructers.InButtonThree) == True:
             self.CheckPermission[2]=True  
     #def EmitSignal(self,event,signal, value):
     #    buttonCheckEvent = event
