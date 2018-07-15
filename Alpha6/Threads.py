@@ -186,7 +186,7 @@ class CheckBoard(QThread):
         If this is a game start, makes a photo of prepeared board
         '''
         self.robot.set_digital_out(1,True)
-        
+        time.sleep(0.5)
         ret, image = self.camera.read()
         ret, image = self.camera.read()
         
@@ -270,7 +270,7 @@ class CheckBoard(QThread):
         Return squares where was some moves
         '''
         self.robot.set_digital_out(1,True)
-        
+        time.sleep(0.5)
         ret, self.current = self.camera.read()
         ret, self.current = self.camera.read()
         
