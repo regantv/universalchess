@@ -602,9 +602,28 @@ class MainGame(QWidget):
                                 #print('222222222222222')
                                 self.CheckPermission[self.curPlayer[0]] = False
                             else:
-                                pass
-                                #self.robot.set_digital_out(2+self.curPlayer[0],True)
-                            
+                                if self.playersNum>1:
+            
+            
+                                    if self.curPlayer[0]==0 and self.playersNum==2:
+                                        self.curPlayer[0]=1
+                                    elif self.curPlayer[0]==1 and self.playersNum==2:
+                                        self.curPlayer[0]=0
+            
+                
+                                if self.playersNum==3:        
+                                
+                                    if self.curPlayer[0]==0  and self.curPlayer[1]==1:
+                                        self.curPlayer[0]=1
+                                    elif self.curPlayer[0]==1  and self.curPlayer[1]==1:
+                                        self.curPlayer[0]=2
+                                        self.curPlayer[1]=0
+                                    elif self.curPlayer[0]==2  and self.curPlayer[1]==0:
+                                        self.curPlayer[0]=1
+                                    elif self.curPlayer[0]==1  and self.curPlayer[1]==0:
+                                        self.curPlayer[0]=0
+                                        self.curPlayer[1]=1
+                                                
                             #wait for videosource
                         else:
                         
@@ -763,11 +782,15 @@ class MainGame(QWidget):
     def ButtonPushed(self,player):
         self.CheckPermission[player]=True
     def checkButtons(self):
+        print ('lets check button in game.py")
         if self.robot.get_digital_in(dataStructers.InButtonOne) == True:
+            print ('Button for player one')
             self.CheckPermission[0]=True
         elif self.robot.get_digital_in(dataStructers.InButtonTwo) == True:
+            print ('button for player two')
             self.CheckPermission[1]=True
         elif self.robot.get_digital_in(dataStructers.InButtonThree) == True:
+            print ('button for player three')
             self.CheckPermission[2]=True  
     #def EmitSignal(self,event,signal, value):
     #    buttonCheckEvent = event
