@@ -140,12 +140,12 @@ class CheckBoard(QThread):
                 
             if self.player ==1:
             
-                self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
+                #self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerTwoCamChessboard, self.acc, self.vel)
                 
             if self.player ==2:
             
-                self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
+                #self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerThreeCamChessboard, self.acc, self.vel)
         
         if side ==2:
@@ -155,24 +155,24 @@ class CheckBoard(QThread):
         
             
                 print('go back')
-                curPose = self.robot.getj().copy()
-                curPose[5]-=2.6
+                #curPose = self.robot.getj().copy()
+                #curPose[5]-=2.6
                 #self.robot.movej(curPose, 0.8, 0.8)
-                curPose[4]+=3.14159
-                self.robot.movej(curPose, 0.8, 0.8)
+                #curPose[4]+=3.14159
+                #self.robot.movej(curPose, 0.8, 0.8)
                 self.robot.movej(dataStructers.playerOneJPose, self.acc, self.vel)
                
             
                 
                 
             if self.player ==1:
-            
-                self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
+                
+                #self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerTwoCamChessboard, self.acc, self.vel)
                 
             if self.player ==2:
             
-                self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
+                #self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerThreeCamChessboard, self.acc, self.vel)
         
                 
@@ -813,7 +813,7 @@ class RoboWorker(QThread):
             position[2]+= 0.1
             if self.player==0:
             
-                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
                 position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
             
             elif self.player==1:
@@ -850,7 +850,7 @@ class RoboWorker(QThread):
             #print('this is structure',dataStructers.figuresDropBlackPos)
             if self.player==0:
             
-                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
                 position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
             
             elif self.player==1:
@@ -888,7 +888,7 @@ class RoboWorker(QThread):
             position[2]+= 0.1
             if self.player==0:
             
-                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
                 position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             
             elif self.player==1:
@@ -925,7 +925,7 @@ class RoboWorker(QThread):
             position[2]+= 0.1
             if self.player==0:
             
-                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
                 position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             
             elif self.player==1:
