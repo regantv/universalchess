@@ -167,13 +167,13 @@ class CheckBoard(QThread):
                 
             if self.player ==1:
                 
-                #self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
-                self.robot.movej(dataStructers.playerTwoCamChessboard, self.acc, self.vel)
+                self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
+                #self.robot.movej(dataStructers.playerTwoCamChessboard, self.acc, self.vel)
                 
             if self.player ==2:
             
-                #self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
-                self.robot.movej(dataStructers.playerThreeCamChessboard, self.acc, self.vel)
+                self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
+                #self.robot.movej(dataStructers.playerThreeCamChessboard, self.acc, self.vel)
         
                 
     def __del__(self):
