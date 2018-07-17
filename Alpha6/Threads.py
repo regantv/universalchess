@@ -1401,24 +1401,26 @@ class RoboWorker(QThread):
             
             self.MakeMove()
             if BoardTurn(self.moveBoards[1]) =='w':
-                        makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
-                         
-                        print('11')
-                        makePhoto.MoveToZero(1)
-                        makePhoto.MakePhoto(1)
-                        makePhoto.MakePhoto(2)
-                        #makePhoto.MoveToZero(2)
-#                         print('22')
+                makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
+                 
+                print('MakeMove() w, special == 0')
+                makePhoto.MoveToZero(1)
+                makePhoto.MakePhoto(1)
+                makePhoto.MakePhoto(2)
+                #makePhoto.MoveToZero(2)
+                #print('22')
             self.robot.set_digital_out(2+self.player,True)
         elif self.Spechial==1:
             
             self.CastlingMove()
             if BoardTurn(self.moveBoards[1]) =='w':
-                        makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
-                        makePhoto.MoveToZero(1)
-                        makePhoto.MakePhoto(1)
-                        makePhoto.MakePhoto(2)
-                        #makePhoto.MoveToZero(2)
+                makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
+
+                print('CastlingMove() w, special == 1')
+                makePhoto.MoveToZero(1)
+                makePhoto.MakePhoto(1)
+                makePhoto.MakePhoto(2)
+                #makePhoto.MoveToZero(2)
             self.MoveToZero() 
             self.robot.set_digital_out(2+self.player,True)
         elif self.Spechial == 2 or self.Spechial == 6 :
@@ -1436,6 +1438,8 @@ class RoboWorker(QThread):
             self.MoveToZero()
             if BoardTurn(self.moveBoards[1]) =='w':
                 makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
+
+                print('CastlingMove() w, special == 4')
                 makePhoto.MoveToZero(1)
                 makePhoto.MakePhoto(1)
                 makePhoto.MakePhoto(2)
@@ -1444,6 +1448,8 @@ class RoboWorker(QThread):
             self.MoveToZero()
             if BoardTurn(self.moveBoards[1]) =='w':
                 makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
+
+                print('Promotion() w, special == 5')
                 makePhoto.MoveToZero(1)
                 makePhoto.MakePhoto(1)
                 makePhoto.MakePhoto(2)
