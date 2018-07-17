@@ -32,13 +32,13 @@ class MainGame(QWidget):
         self.debug = debug
         self.camera = cv2.VideoCapture(id)
          
-        try:
-             while True:
-                 done = self.connect2Robot()
-                 if type(done)!='None':
-                     break
-        except TimeoutException:
-            pass
+        #try:
+        #     while True:
+        #         done = self.connect2Robot()
+        #         if type(done)!='None':
+        #             break
+        #except TimeoutException:
+        #    pass
           
         if  self.debug:
             self.debug = debug
@@ -523,7 +523,7 @@ class MainGame(QWidget):
                 self.logs[self.curPlayer[0]].setAlignment(QtCore.Qt.AlignRight)
                 self.logs[self.curPlayer[0]].append(message)
             
-        self.Draw(self.playerStatus[0][0],0)
+        self.Draw(self.playerStatus[currentPlayer][0],currentPlayer)
         
         #self.GenerateMoveDone[player]= True
         

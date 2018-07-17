@@ -45,7 +45,7 @@ class MainGame(QWidget):
             print('this is debug mode')
         else:
             print('all fine')
-        self.robot = FakeRobot('ip',1)
+        #self.robot = FakeRobot('ip',1)
         dialog = fenInit.InitScreen(self.robot)
         dialog.exec()
         dialog = InitScreen.InitScreen(0,self.robot)
@@ -495,7 +495,12 @@ class MainGame(QWidget):
             #
             #print(boardWithMove.fen())
             #
-            
+            if self.playerStatus[currentPlayer][1]:
+                if self.playerStatus[currentPlayer][0].is_check():
+                
+                    self.robot.set_digital_out(dataStructers.led_red,True)
+                    self.robot.set_digital_out(dataStructers.led_blue,True)
+                    
             self.RobotMoveDone[currentPlayer]=False
             if self.playerStatus[currentPlayer][1]==True:
                 robotMoveThread=RoboWorker(currentPlayer,[a,b,c],[prevBoard,boardWithMove],self.robot,castling,self.camera) 
@@ -505,11 +510,7 @@ class MainGame(QWidget):
             robotMoveThread.doneSignal.connect(self.MoveDone)
             robotMoveThread.start()
             
-            if self.playerStatus[currentPlayer][1]:
-                if self.playerStatus[currentPlayer][0].is_check():
-                
-                    self.robot.set_digital_out(dataStructers.led_red,True)
-                    self.robot.set_digital_out(dataStructers.led_blue,True)
+           
            
             
             if BoardTurn(prevBoard) =='w':
@@ -521,7 +522,7 @@ class MainGame(QWidget):
                 self.logs[self.curPlayer[0]].setAlignment(QtCore.Qt.AlignRight)
                 self.logs[self.curPlayer[0]].append(message)
             
-        self.Draw(self.playerStatus[0][0],0)
+        self.Draw(self.playerStatus[currentPlayer][0],currentPlayer)
         
         #self.GenerateMoveDone[player]= True
         
@@ -782,14 +783,7 @@ class MainGame(QWidget):
     def ButtonPushed(self,player):
         self.CheckPermission[player]=True
     def checkButtons(self):
-<<<<<<< HEAD
-        if self.robot.get_digital_in(dataStructers.InButtonOne) == True:
-            self.CheckPermission[0]=True
-        elif self.robot.get_digital_in(dataStructers.InButtonTwo) == True:
-            self.CheckPermission[1]=True
-        elif self.robot.get_digital_in(dataStructers.InButtonThree) == True:
-=======
-        print ('lets check button in game.py")
+        print ('lets check button in game.py')
         if self.robot.get_digital_in(dataStructers.InButtonOne) == True:
             print ('Button for player one')
             self.CheckPermission[0]=True
@@ -798,7 +792,6 @@ class MainGame(QWidget):
             self.CheckPermission[1]=True
         elif self.robot.get_digital_in(dataStructers.InButtonThree) == True:
             print ('button for player three')
->>>>>>> 50cc9838efa070b4fd1f15920f0c9a7e8910cd67
             self.CheckPermission[2]=True  
     #def EmitSignal(self,event,signal, value):
     #    buttonCheckEvent = event

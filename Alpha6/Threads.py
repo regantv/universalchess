@@ -140,12 +140,12 @@ class CheckBoard(QThread):
                 
             if self.player ==1:
             
-                self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
+                #self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerTwoCamChessboard, self.acc, self.vel)
                 
             if self.player ==2:
             
-                self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
+                #self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerThreeCamChessboard, self.acc, self.vel)
         
         if side ==2:
@@ -155,24 +155,24 @@ class CheckBoard(QThread):
         
             
                 print('go back')
-                curPose = self.robot.getj().copy()
-                curPose[5]-=2.6
+                #curPose = self.robot.getj().copy()
+                #curPose[5]-=2.6
                 #self.robot.movej(curPose, 0.8, 0.8)
-                curPose[4]+=3.14159
-                self.robot.movej(curPose, 0.8, 0.8)
+                #curPose[4]+=3.14159
+                #self.robot.movej(curPose, 0.8, 0.8)
                 self.robot.movej(dataStructers.playerOneJPose, self.acc, self.vel)
                
             
                 
                 
             if self.player ==1:
-            
-                self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
+                
+                #self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerTwoCamChessboard, self.acc, self.vel)
                 
             if self.player ==2:
             
-                self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
+                #self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerThreeCamChessboard, self.acc, self.vel)
         
                 
@@ -734,12 +734,30 @@ class RoboWorker(QThread):
                         
         position = GetLPlayerPose(self.player, figure).copy()
         if figure in ('Q','K','P','R','N','B'):
-            position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
-            position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+            if self.player==0:
+            
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+            
+            elif self.player==1:
+                position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+            elif self.player==2:
+                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
             position[2] = current[2]
         else:
-            position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
-            position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            if self.player==0:
+            
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            
+            elif self.player==1:
+                position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+            elif self.player==2:
+                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             position[2] = current[2]
                     
         self.robot.movel(position,self.acc,self.vel)
@@ -813,15 +831,15 @@ class RoboWorker(QThread):
             position[2]+= 0.1
             if self.player==0:
             
-                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
                 position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
             
             elif self.player==1:
                 position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
-                position[1]-= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+                position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
             elif self.player==2:
-                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
-                position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
             
             #print('position',position)
             self.robot.movel(position,self.acc,self.vel)
@@ -850,15 +868,15 @@ class RoboWorker(QThread):
             #print('this is structure',dataStructers.figuresDropBlackPos)
             if self.player==0:
             
-                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
                 position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
             
             elif self.player==1:
                 position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
-                position[1]-= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+                position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
             elif self.player==2:
-                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
-                position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
             
             #print('position',position)
             self.robot.movel(position,self.acc,self.vel)
@@ -888,15 +906,15 @@ class RoboWorker(QThread):
             position[2]+= 0.1
             if self.player==0:
             
-                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
                 position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             
             elif self.player==1:
                 position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
-                position[1]-= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+                position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             elif self.player==2:
-                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
-                position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             
             #print('position',position)
             self.robot.movel(position,self.acc,self.vel)
@@ -925,15 +943,15 @@ class RoboWorker(QThread):
             position[2]+= 0.1
             if self.player==0:
             
-                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
                 position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             
             elif self.player==1:
                 position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
-                position[1]-= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+                position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             elif self.player==2:
-                position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
-                position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+                position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
             
             #position[2]+= 0.1
             #position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
@@ -1115,7 +1133,7 @@ class RoboWorker(QThread):
                 if _currentBoardList[i]==0 and _defBoardList[i]!=0:
                     
                     figureOnBoard =[_defBoardList[i],_currentBoardList.count(_defBoardList[i])]
-                    print(figureOnBoard)
+                    #print(figureOnBoard)
                     
                     if figureOnBoard[1]==0:
                         #print('Solutution 1')
@@ -1132,15 +1150,32 @@ class RoboWorker(QThread):
                         
                         position = GetLPlayerPose(self.player, figureOnBoard[0]).copy()
                         if figureOnBoard[0] in ('Q','K','P','R','N','B'):
-                                    position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
-                                    position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+                                    if self.player==0:
+                                        position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                                        position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+                                    
+                                    elif self.player==1:
+                                        position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                                        position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+                                    elif self.player==2:
+                                        position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                                        position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
                                     position[2] = current[2]
                         else:
-                                    position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
-                                    position[1]+= dataStructers.dropboard_squareY* dataStructers.figuresDropBlackPos[key][1]
+                                    if self.player==0:
+            
+                                        position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                                        position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+                                    
+                                    elif self.player==1:
+                                        position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                                        position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+                                    elif self.player==2:
+                                        position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                                        position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
                                     position[2] = current[2]
                         
-                        print("884 valrs")
+                        #print("884 valrs")
                         self.robot.movel(position,self.acc,self.vel)
                         self.GripFigure(figureOnBoard[0],True)
                         self.MoveXY(self.ReturnCoords(i), self.player)
@@ -1169,7 +1204,7 @@ class RoboWorker(QThread):
                                 
                                 #print('Figure ',index,'Placed wrong Move it to right spot')
                                 self.valrs=True
-                                print("912 valrs")
+                                #print("912 valrs")
                                 self.MoveXY(self.ReturnCoords(index), self.player)
                                 self.GripFigure(figureOnBoard[0],True)
                                 self.MoveXY(self.ReturnCoords(i), self.player)
@@ -1189,20 +1224,36 @@ class RoboWorker(QThread):
                                     pk = str(8-tmp)
                                 elif figureOnBoard[0] in ('k','K','q','Q'):
                                     pk =''
-                                print(figureOnBoard[0]+pk)
+                                #print(figureOnBoard[0]+pk)
                                 key = figureOnBoard[0]+pk
                                 
                                 current = self.robot.getl()
                                 position = GetLPlayerPose(self.player, figureOnBoard[0]).copy()
                                 if figureOnBoard[0] in ('Q','K','P','R','N','B'):
+                                    if self.player==0:
+                                        position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                                        position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+                                    
+                                    elif self.player==1:
+                                        position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                                        position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
+                                    elif self.player==2:
+                                        position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
+                                        position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
                                     position[2] = current[2]
-                                    position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropWhitePos[key][0]
-                                    position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropWhitePos[key][1]
                                 else:
+                                    if self.player==0:
+            
+                                        position[1]-= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                                        position[0]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+                                    
+                                    elif self.player==1:
+                                        position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                                        position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
+                                    elif self.player==2:
+                                        position[1]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
+                                        position[0]-= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
                                     position[2] = current[2]
-                                    position[0]+= dataStructers.dropboard_squareX * dataStructers.figuresDropBlackPos[key][0]
-                                    position[1]+= dataStructers.dropboard_squareY * dataStructers.figuresDropBlackPos[key][1]
-                                
                                 self.robot.movel(position,self.acc,self.vel)
                                 self.GripFigure(figureOnBoard[0],True)
                                 self.MoveXY(self.ReturnCoords(i), self.player)
