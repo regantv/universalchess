@@ -126,7 +126,7 @@ class CheckBoard(QThread):
         
             
             
-                print('move to photo')    
+                print('move to photo Player 1')    
                 #self.robot.movej(dataStructers.playerOneJPose, self.acc, self.vel)
                 #curPose = self.robot.getj().copy()
                 #curPose[4]-=3.14159
@@ -140,11 +140,13 @@ class CheckBoard(QThread):
                 
             if self.player ==1:
             
+                print('move to photo Player 2')
                 #self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerTwoCamChessboard, self.acc, self.vel)
                 
             if self.player ==2:
             
+                print('move to photo Player 3')
                 #self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
                 self.robot.movej(dataStructers.playerThreeCamChessboard, self.acc, self.vel)
         
@@ -154,7 +156,7 @@ class CheckBoard(QThread):
             if self.player ==0:
         
             
-                print('go back')
+                print('go back Player 1')
                 #curPose = self.robot.getj().copy()
                 #curPose[5]-=2.6
                 #self.robot.movej(curPose, 0.8, 0.8)
@@ -167,11 +169,13 @@ class CheckBoard(QThread):
                 
             if self.player ==1:
                 
+                print('go back Player 2')
                 self.robot.movej(dataStructers.playerTwoJPose, self.acc, self.vel)
                 #self.robot.movej(dataStructers.playerTwoCamChessboard, self.acc, self.vel)
                 
             if self.player ==2:
             
+                print('go back Player 3')
                 self.robot.movej(dataStructers.playerThreeJPose, self.acc, self.vel)
                 #self.robot.movej(dataStructers.playerThreeCamChessboard, self.acc, self.vel)
         
@@ -199,7 +203,6 @@ class CheckBoard(QThread):
         
        
         if param==0:
-            
             path = 'images/base'+str(self.player)+'.bmp'
             self.robot.set_digital_out(2+self.player,True)
         elif param==1:
@@ -490,10 +493,10 @@ class CheckBoard(QThread):
                                 data =  '1'+str(self.player)+str(i.from_square)+"-"+str(i.to_square)
                                 self.MoveToZero(1)
                                 self.MakePhoto(1)
+                                #self.MoveToZero(2)
                                 self.resultMove= i
                                 self.result.emit(data)
                                 self.robot.set_digital_out(dataStructers.led_red, False)
-                                #self.MoveToZero(2)
                                 break
                 else:
                     result = self.CheckWithDiff(moveList)
