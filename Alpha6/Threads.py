@@ -1411,8 +1411,8 @@ class RoboWorker(QThread):
                 #print('22')
             self.robot.set_digital_out(2+self.player,True)
         elif self.Spechial==1:
-            
             self.CastlingMove()
+            self.MoveToZero()
             if BoardTurn(self.moveBoards[1]) =='w':
                 makePhoto= CheckBoard(self.player,self.moveBoards[1],self.robot,self.camera,3)
 
