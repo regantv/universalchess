@@ -553,6 +553,10 @@ class MainGame(QWidget):
             #print('Current turn',BoardTurn(self.playerStatus[self.curPlayer[0]][0]))
             
             if self.GenerateMoveDone[currentPlayer]:
+                
+                self.robot.set_digital_out(dataStructers.OutButtonOne,True)
+                self.robot.set_digital_out(dataStructers.OutButtonTwo,True)
+                self.robot.set_digital_out(dataStructers.OutButtonThree,True)
                 '''
                     If move Generation from player or Ai is finished, than game may be continued
                 '''
@@ -656,18 +660,25 @@ class MainGame(QWidget):
                             
                     if BoardTurn(self.playerStatus[self.curPlayer[0]][0]) =='b':
                     #print('Black Move')
-                            self.curTurn[currentPlayer].setText('Current\n Turn:\n Black')
-                            
-                            self.GenerateMoveDone[currentPlayer] = False
-                            self.robot.set_digital_out(2+currentPlayer,False)
-                            #print(' Robot Move')
-                            gameThread1 = GameLoop(self.playerStatus[currentPlayer][0],self.playerStatus[currentPlayer][3],self.engine,currentPlayer)
-                            gameThread1.dataSignal[str].connect(self.GainDataFromThread)
-                            gameThread1.doneSignal[int].connect(self.LoopThreadDone)
-                            self.robot.set_digital_out(dataStructers.led_blue,True)
-                            if gameThread1.isFinished:
-                                gameThread1.start()
-                            self.robot.set_digital_out(2+currentPlayer,False)
+                        self.curTurn[currentPlayer].setText('Current\n Turn:\n Black')
+                        
+                        self.GenerateMoveDone[currentPlayer] = False
+                        #self.robot.set_digital_out(2+currentPlayer,False)
+                        self.robot.set_digital_out(dataStructers.OutButtonOne,False)
+                        self.robot.set_digital_out(dataStructers.OutButtonTwo,False)
+                        self.robot.set_digital_out(dataStructers.OutButtonThree,False)
+                        
+                        #print(' Robot Move')
+                        gameThread1 = GameLoop(self.playerStatus[currentPlayer][0],self.playerStatus[currentPlayer][3],self.engine,currentPlayer)
+                        gameThread1.dataSignal[str].connect(self.GainDataFromThread)
+                        gameThread1.doneSignal[int].connect(self.LoopThreadDone)
+                        self.robot.set_digital_out(dataStructers.led_blue,True)
+                        if gameThread1.isFinished:
+                            gameThread1.start()
+                        #self.robot.set_digital_out(2+currentPlayer,False)
+                        self.robot.set_digital_out(dataStructers.OutButtonOne,False)
+                        self.robot.set_digital_out(dataStructers.OutButtonTwo,False)
+                        self.robot.set_digital_out(dataStructers.OutButtonThree,False)
 #                     
 #             if self.playersNum==1:
 #                     self.curPlayer[0]=0
@@ -713,8 +724,11 @@ class MainGame(QWidget):
             if self.playerStatus[self.curInt-1][1]:
                 self.robot.set_digital_out(2+self.curInt-1,True)
             else:
-                self.robot.set_digital_out(2+self.curInt-1,False)
-        self.curInt+=1
+                #self.robot.set_digital_out(2+self.curInt-1,False)
+                self.robot.set_digital_out(dataStructers.OutButtonOne,False)
+                self.robot.set_digital_out(dataStructers.OutButtonTwo,False)
+                self.robot.set_digital_out(dataStructers.OutButtonThree,False)
+    self.curInt+=1
             
     def RestartOne(self):
         #self.playerStatus[0][0] = chess.Board()   
