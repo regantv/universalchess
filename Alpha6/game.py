@@ -379,6 +379,14 @@ class MainGame(QWidget):
             '''
             if first data symbol 0  then no turn done
             '''
+            if self.curPlayer[0]==0:
+            
+                self.robot.set_digital_out(dataStructers.OutButtonOne,True)
+            elif self.curPlayer[0]==1:
+                self.robot.set_digital_out(dataStructers.OutButtonTwo,True)
+            elif self.curPlayer[0]==2:
+                self.robot.set_digital_out(dataStructers.OutButtonThree,True)
+                
             if self.playersNum>1:
             
             
@@ -428,6 +436,13 @@ class MainGame(QWidget):
             something gone wrong and need to be corrected
             '''
             print('Something went wrong')
+            if self.curPlayer[0]==0:
+            
+                self.robot.set_digital_out(dataStructers.OutButtonOne,True)
+            elif self.curPlayer[0]==1:
+                self.robot.set_digital_out(dataStructers.OutButtonTwo,True)
+            elif self.curPlayer[0]==2:
+                self.robot.set_digital_out(dataStructers.OutButtonThree,True)
             if self.playersNum>1:
             
             
@@ -774,11 +789,15 @@ class MainGame(QWidget):
                 
                 #print(' Init  photo',self.curInt)       
                 self.GenerateMoveDone[self.curInt] = False
-                makeFirstPhotoEvent = CheckBoard(self.curInt,self.playerStatus[self.curInt][0],self.robot,self.camera,1)
-                    
-                makeFirstPhotoEvent.result[str].connect(self.initPhotoDone)
+                if self.playerStatus[self.curInt][0].fen() == 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1':
+                    makeFirstPhotoEvent = CheckBoard(self.curInt,self.playerStatus[self.curInt][0],self.robot,self.camera,1)
+                    makeFirstPhotoEvent.result[str].connect(self.initPhotoDone)
+                    makeFirstPhotoEvent.start()
+                else:
+                    makeFirstPhotoEvent = CheckBoard(self.curInt,self.playerStatus[self.curInt][0],self.robot,self.camera,3)
+                    makeFirstPhotoEvent.result[str].connect(self.initPhotoDone)
+                    makeFirstPhotoEvent.start()
                 
-                makeFirstPhotoEvent.start()
         
     def ButtonPushed(self,player):
         self.CheckPermission[player]=True
