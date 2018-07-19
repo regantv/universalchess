@@ -450,7 +450,7 @@ class CheckBoard(QThread):
                             
                    
                          
-                print('This is moves ',moves)        
+                print('This is moves ' ,moves)        
                 if len(moves)==0:
                     self.robot.set_digital_out(dataStructers.led_red, True)
                     print('No move Done')
@@ -661,9 +661,7 @@ class RoboWorker(QThread):
         self.camera = cam
         self.valrs = False
         self.promotionTakeDrop = False
-        self.robot.set_digital_out(dataStructers.OutButtonOne,False)
-        self.robot.set_digital_out(dataStructers.OutButtonTwo,False)
-        self.robot.set_digital_out(dataStructers.OutButtonThree,False)
+        self.robot.set_digital_out(2+player,False)
         self.same = True
         if move[2]!='':
             self.Spechial = 5
