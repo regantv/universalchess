@@ -102,7 +102,9 @@ dropboard_squareY = 0.034
 vel = 0.8
 acc = 0.8
 #robot sleep after move
-sleep = 0.2
+sleepRobot = 0.2
+#sleep after flash
+sleepFlash = 1
 
 #inputs
 InButtonOne = 2

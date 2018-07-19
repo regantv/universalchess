@@ -190,7 +190,7 @@ class CheckBoard(QThread):
         If this is a game start, makes a photo of prepeared board
         '''
         self.robot.set_digital_out(dataStructers.led_flash,True)
-        time.sleep(1)
+        time.sleep(dataStructers.sleepFlash)
         ret, image = self.camera.read()
         ret, image = self.camera.read()
         
@@ -273,7 +273,7 @@ class CheckBoard(QThread):
         Return squares where was some moves
         '''
         self.robot.set_digital_out(dataStructers.led_flash,True)
-        time.sleep(1)
+        time.sleep(dataStructers.sleepFlash)
         ret, self.current = self.camera.read()
         ret, self.current = self.camera.read()
         
@@ -655,8 +655,8 @@ class RoboWorker(QThread):
         self.move = move
         self.moveBoards=moveBoards
         self.robot = robot
-        self.acc = 0.6
-        self.vel =0.8
+        self.acc = dataStructers.acc
+        self.vel = dataStructers.vel
         self.Spechial= Spechial
         self.camera = cam
         self.valrs = False
@@ -773,11 +773,11 @@ class RoboWorker(QThread):
         #position[2] = dataStructers.figuresDropOneWhite[2] + dataStructers.figureGripStruc[figure]
         #self.robot.movel (position, self.acc, self.vel)
         #self.robot.set_digital_out(dataStructers.OutGrip,False)     
-        #time.sleep(dataStructers.sleep)
+        #time.sleep(dataStructers.sleepRobot)
         
         #position[2]+= 0.1
         #self.robot.movel (position, self.acc, self.vel)
-        #time.sleep(dataStructers.sleep)
+        #time.sleep(dataStructers.sleepRobot)
         #print("611")
             
     def MakeMove(self):
@@ -851,11 +851,11 @@ class RoboWorker(QThread):
             position[2] = dataStructers.figuresDropOneWhite[2] + dataStructers.figureGripStruc[figure]
             self.robot.movel (position, self.acc, self.vel)
             self.robot.set_digital_out(dataStructers.OutGrip,False)     
-            time.sleep(dataStructers.sleep)
+            time.sleep(dataStructers.sleepRobot)
             
             position[2]+= 0.1
             self.robot.movel (position, self.acc, self.vel)
-            time.sleep(dataStructers.sleep)
+            time.sleep(dataStructers.sleepRobot)
                         
         elif figure=='P':
             tmp = ('8','7','6','5','4','3','2','1')
@@ -888,11 +888,11 @@ class RoboWorker(QThread):
             position[2] = dataStructers.figuresDropOneWhite[2] + dataStructers.figureGripStruc[figure]
             self.robot.movel (position, self.acc, self.vel)
             self.robot.set_digital_out(dataStructers.OutGrip,False)     
-            time.sleep(dataStructers.sleep)
+            time.sleep(dataStructers.sleepRobot)
             
             position[2]+= 0.1
             self.robot.movel (position, self.acc, self.vel)
-            time.sleep(dataStructers.sleep)
+            time.sleep(dataStructers.sleepRobot)
             
             
         elif figure in ['b','r','n','k','q']:
@@ -925,11 +925,11 @@ class RoboWorker(QThread):
             position[2] = dataStructers.figuresDropOneBlack[2] + dataStructers.figureGripStruc[figure]
             self.robot.movel (position, self.acc, self.vel)
             self.robot.set_digital_out(dataStructers.OutGrip,False)     
-            time.sleep(dataStructers.sleep)
+            time.sleep(dataStructers.sleepRobot)
             
             position[2]+= 0.1
             self.robot.movel (position, self.acc, self.vel)
-            time.sleep(dataStructers.sleep)
+            time.sleep(dataStructers.sleepRobot)
             
             
         elif figure =='p':
@@ -965,11 +965,11 @@ class RoboWorker(QThread):
             position[2] = dataStructers.figuresDropOneBlack[2] + dataStructers.figureGripStruc[figure]
             self.robot.movel (position, self.acc, self.vel)
             self.robot.set_digital_out(dataStructers.OutGrip,False)     
-            time.sleep(dataStructers.sleep)
+            time.sleep(dataStructers.sleepRobot)
             
             position[2]+= 0.1
             self.robot.movel (position, self.acc, self.vel)
-            time.sleep(dataStructers.sleep)
+            time.sleep(dataStructers.sleepRobot)
             
             
     def MoveXY(self,square,player): 
@@ -1034,11 +1034,11 @@ class RoboWorker(QThread):
             if grip:
                 print('762 z=',pose[2])
                 self.robot.set_digital_out(dataStructers.OutGrip,True)
-                time.sleep(dataStructers.sleep)
+                time.sleep(dataStructers.sleepRobot)
             else:
                 print('766 z=',pose[2])
                 self.robot.set_digital_out(dataStructers.OutGrip,False)     
-                time.sleep(dataStructers.sleep)
+                time.sleep(dataStructers.sleepRobot)
             #pose[2] +=dataStructers.figureGripStruc[figure]
             self.robot.movel (defPose, self.acc, self.vel)
        
@@ -1058,7 +1058,7 @@ class RoboWorker(QThread):
                 self.robot.movel (pose, self.acc, self.vel)
                 self.robot.set_digital_out(dataStructers.OutGrip,True)
                 print('787 z=',pose[2])
-                time.sleep(dataStructers.sleep)
+                time.sleep(dataStructers.sleepRobot)
         
             
             else:
@@ -1070,7 +1070,7 @@ class RoboWorker(QThread):
                 self.robot.movel (pose, self.acc, self.vel)
                 self.robot.set_digital_out(dataStructers.OutGrip,False)     
                 print('799 z=',pose[2])
-                time.sleep(dataStructers.sleep)
+                time.sleep(dataStructers.sleepRobot)
         elif self.Spechial ==5:
             if figure in ['Q','K','R','B','N','P']:
                 z = dataStructers.figuresDropOneWhite.copy()
@@ -1345,7 +1345,7 @@ class RoboWorker(QThread):
                 self.MoveXY(square, self.player)
                 self.GripFigure(figure,False)
 #                 while self.robot.is_running():
-#                     time.sleep(dataStructers.sleep)
+#                     time.sleep(dataStructers.sleepRobot)
             if figure=='Q' or figure=='K' :
                 key =figure
                 position = dataStructers.figuresDropOneWhite.copy()
@@ -1355,7 +1355,7 @@ class RoboWorker(QThread):
                 self.GripFigure(figure,True)
                 listOfPlaced.append(figure)
 #                 while self.robot.is_running():
-#                     time.sleep(dataStructers.sleep)
+#                     time.sleep(dataStructers.sleepRobot)
                 square = self.ReturnCoords(i)
                 self.MoveXY(square, self.player)
                 self.GripFigure(figure,False)
@@ -1374,7 +1374,7 @@ class RoboWorker(QThread):
                 self.GripFigure(figure,True)
                 listOfPlaced.append(figure)
 #                 while self.robot.is_running():
-#                     time.sleep(dataStructers.sleep)
+#                     time.sleep(dataStructers.sleepRobot)
                 square = self.ReturnCoords(i)
                 self.MoveXY(square, self.player)
                 self.GripFigure(figure,False)
@@ -1387,7 +1387,7 @@ class RoboWorker(QThread):
                 self.GripFigure(figure,True)
                 listOfPlaced.append(figure)
 #                 while self.robot.is_running():
-#                     time.sleep(dataStructers.sleep)
+#                     time.sleep(dataStructers.sleepRobot)
                 square = self.ReturnCoords(i)
                 self.MoveXY(square, self.player)
                 self.GripFigure(figure,False)
