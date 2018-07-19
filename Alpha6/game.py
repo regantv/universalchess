@@ -61,7 +61,7 @@ class MainGame(QWidget):
         self.curPlayer = [0,1]
         self.loopDone = [True,True,True]
         self.RobotMoveDone = [True,True,True]
-        self.GenerateMoveDone = [True,True,True]
+        self.GenerateMoveDone = [True,True,True,True]
         self.playerPhotoStatus=[True,True,True]
         self.InitUI(False)
         self.CheckPermission = [False,False,False]

@@ -180,37 +180,37 @@ class InitScreenRobot(QDialog):
             self.playerOneJPose = self.robot.getj()
             self.playerOneLPose = self.robot.getl()
             
-        # elif self.stage==4:
-        #     #self.eventText.clear()
-        #     self.coordinates = self.robot.getl()
-        #     self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-        #     self.eventText.append("Board 1, Step 4: Install the robot in the indicated position, which is marked in the picture on the right\n")  
-        #     self.eventPicture.show()
-        #     self.eventPicture.move(256+26*11,16+26*8)
-            
-        #     self.playerOneJleftLimit = self.robot.getj()
-            
-        # elif self.stage==5:
-        #     #self.eventText.clear()
-        #     self.coordinates = self.robot.getl()
-        #     self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-        #     self.eventText.append("Board 1, Step 5: Install the robot in the indicated position, which is marked in the picture on the right\n")  
-        #     self.eventPicture.show()
-        #     self.eventPicture.move(256,16+26*8)
-            
-        #     self.playerOneJrightLimit = self.robot.getj()
         elif self.stage==4:
             #self.eventText.clear()
             self.coordinates = self.robot.getl()
-            self.eventText.append("Set X: " + str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
+            self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
             self.eventText.append("Board 1, Step 4: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+            self.eventPicture.show()
+            self.eventPicture.move(256+26*11,16+26*8)
+            
+            self.playerOneJleftLimit = self.robot.getj()
+            
+        elif self.stage==5:
+            #self.eventText.clear()
+            self.coordinates = self.robot.getl()
+            self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
+            self.eventText.append("Board 1, Step 5: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+            self.eventPicture.show()
+            self.eventPicture.move(256,16+26*8)
+            
+            self.playerOneJrightLimit = self.robot.getj()
+        elif self.stage==6:
+            #self.eventText.clear()
+            self.coordinates = self.robot.getl()
+            self.eventText.append("Set X: " + str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
+            self.eventText.append("Board 1, Step 6: Install the robot in the indicated position, which is marked in the picture on the right\n")  
             self.eventPicture.show()
             self.instructionPicture.show()
             self.roi.hide()
             self.eventPicture.move(256+26*13,16+26*8)
             
             self.playerOneDropBlack = self.robot.getl()
-        elif self.stage==5:
+        elif self.stage==7:
             self.playerOneDropWhite = self.robot.getl()
             
             if self.cntPlayer == 1:
@@ -225,7 +225,7 @@ class InitScreenRobot(QDialog):
                 self.coordinates = self.robot.getl()
                 self.roiPlayer = 2
                 self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-                self.eventText.append("Board 2, Step 5: Set the robot to allow the camera to cover the entire chessboard\n")  
+                self.eventText.append("Board 2, Step 7: Set the robot to allow the camera to cover the entire chessboard\n")  
                 self.eventPicture.hide()
                 self.instructionPicture.hide()
                 self.roi.clear()
@@ -233,54 +233,54 @@ class InitScreenRobot(QDialog):
                 self.doneBtn.setEnabled(False)
                 self.backBtn.setEnabled(False)
                 self.Roi(1)
-        elif self.stage==6:
+        elif self.stage==8:
             if self.cntPlayer == 1:
                 self.WriteDataStructers()
                 self.close()
             else:
                 self.eventText.append("Player " + str(self.roiPlayer) + "\n")
                 self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-                self.eventText.append("Board 2, Step 6: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+                self.eventText.append("Board 2, Step 8: Install the robot in the indicated position, which is marked in the picture on the right\n")  
                 self.eventPicture.show()
                 self.instructionPicture.show()
                 self.roi.hide()
                 self.eventPicture.move(256+26*10,16+26)
-        elif self.stage==7:
+        elif self.stage==9:
                 #self.eventText.clear()
                 self.coordinates = self.robot.getl()
                 self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-                self.eventText.append("Board 2, Step 7: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+                self.eventText.append("Board 2, Step 9: Install the robot in the indicated position, which is marked in the picture on the right\n")  
                 self.eventPicture.show()
                 
                 self.playerTwoJPose = self.robot.getj()
                 self.playerTwoLPose = self.robot.getl()
                 
                 self.eventPicture.move(256+26*2,16+26*8)
-        # elif self.stage==8:
-        #     #self.eventText.clear()
-        #     self.coordinates = self.robot.getl()
-        #     self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-        #     self.eventText.append("Board 2, Step 8: Install the robot in the indicated position, which is marked in the picture on the right\n")  
-        #     self.eventPicture.show()
-            
-        #     self.playerTwoJleftLimit = self.robot.getj()
-            
-        #     self.eventPicture.move(256+26*11,16+26*8)
-        # elif self.stage==9:
-        #     #self.eventText.clear()
-        #     self.coordinates = self.robot.getl()
-        #     self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-        #     self.eventText.append("Board 2, Step 11: Install the robot in the indicated position, which is marked in the picture on the right\n")  
-        #     self.eventPicture.show()
-            
-        #     self.playerTwoJrightLimit = self.robot.getj()
-            
-        #     self.eventPicture.move(256,16+26*8)
-        elif self.stage==8:
+        elif self.stage==10:
             #self.eventText.clear()
             self.coordinates = self.robot.getl()
             self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-            self.eventText.append("Board 2, Step 8: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+            self.eventText.append("Board 2, Step 10: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+            self.eventPicture.show()
+            
+            self.playerTwoJleftLimit = self.robot.getj()
+            
+            self.eventPicture.move(256+26*11,16+26*8)
+        elif self.stage==11:
+            #self.eventText.clear()
+            self.coordinates = self.robot.getl()
+            self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
+            self.eventText.append("Board 2, Step 11: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+            self.eventPicture.show()
+            
+            self.playerTwoJrightLimit = self.robot.getj()
+            
+            self.eventPicture.move(256,16+26*8)
+        elif self.stage==12:
+            #self.eventText.clear()
+            self.coordinates = self.robot.getl()
+            self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
+            self.eventText.append("Board 2, Step 12: Install the robot in the indicated position, which is marked in the picture on the right\n")  
             self.eventPicture.show()
             self.instructionPicture.show()
             self.roi.hide()
@@ -288,7 +288,7 @@ class InitScreenRobot(QDialog):
             self.playerTwoDropBlack = self.robot.getl()
             
             self.eventPicture.move(256+26*13,16+26*8)
-        elif self.stage==9:
+        elif self.stage==13:
             self.playerTwoDropWhite = self.robot.getl() 
             
             if self.cntPlayer == 2:
@@ -304,7 +304,7 @@ class InitScreenRobot(QDialog):
                 self.coordinates = self.robot.getl()
                 self.roiPlayer = 3
                 self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-                self.eventText.append("Board 3, Step 9: Set the robot to allow the camera to cover the entire chessboard\n")  
+                self.eventText.append("Board 3, Step 13: Set the robot to allow the camera to cover the entire chessboard\n")  
                 self.eventPicture.hide()
                 self.instructionPicture.hide()
                 self.roi.clear()
@@ -312,61 +312,61 @@ class InitScreenRobot(QDialog):
                 self.doneBtn.setEnabled(False)
                 self.backBtn.setEnabled(False)
                 self.Roi(1)
-        elif self.stage==10:
+        elif self.stage==14:
             if self.cntPlayer == 2:
                 self.WriteDataStructers()
                 self.close()
             else:
                 self.coordinates = self.robot.getl()
                 self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-                self.eventText.append("Board 3, Step 10: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+                self.eventText.append("Board 3, Step 14: Install the robot in the indicated position, which is marked in the picture on the right\n")  
                 self.eventPicture.show()
                 self.instructionPicture.show()
                 self.roi.hide()
                 self.eventPicture.move(256+26*10,16+26)
-        elif self.stage==11:
+        elif self.stage==15:
             
                 #self.eventText.clear()
                 self.coordinates = self.robot.getl()
                 self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-                self.eventText.append("Board 3, Step 11: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+                self.eventText.append("Board 3, Step 15: Install the robot in the indicated position, which is marked in the picture on the right\n")  
                 self.eventPicture.show()
                 
                 self.playerThreeJPose = self.robot.getj()
                 self.playerThreeLPose = self.robot.getl()
                 
                 self.eventPicture.move(256+26*2,16+26*8)
-        # elif self.stage==12:
-        #     #self.eventText.clear()
-        #     self.coordinates = self.robot.getl()
-        #     self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-        #     self.eventText.append("Board 3, Step 16: Install the robot in the indicated position, which is marked in the picture on the right\n")  
-        #     self.eventPicture.show()
-            
-        #     self.playerThreeJleftLimit = self.robot.getj()
-            
-        #     self.eventPicture.move(256+26*11,16+26*8)
-        # elif self.stage==13:
-        #     #self.eventText.clear()
-        #     self.coordinates = self.robot.getl()
-        #     self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-        #     self.eventText.append("Board 3, Step 17: Install the robot in the indicated position, which is marked in the picture on the right\n")  
-        #     self.eventPicture.show()
-            
-        #     self.playerThreeJrightLimit = self.robot.getj()
-            
-        #     self.eventPicture.move(256,16+26*8)
-        elif self.stage==12:
+        elif self.stage==16:
             #self.eventText.clear()
             self.coordinates = self.robot.getl()
             self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
-            self.eventText.append("Board 3, Step 12: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+            self.eventText.append("Board 3, Step 16: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+            self.eventPicture.show()
+            
+            self.playerThreeJleftLimit = self.robot.getj()
+            
+            self.eventPicture.move(256+26*11,16+26*8)
+        elif self.stage==17:
+            #self.eventText.clear()
+            self.coordinates = self.robot.getl()
+            self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
+            self.eventText.append("Board 3, Step 17: Install the robot in the indicated position, which is marked in the picture on the right\n")  
+            self.eventPicture.show()
+            
+            self.playerThreeJrightLimit = self.robot.getj()
+            
+            self.eventPicture.move(256,16+26*8)
+        elif self.stage==18:
+            #self.eventText.clear()
+            self.coordinates = self.robot.getl()
+            self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
+            self.eventText.append("Board 3, Step 18: Install the robot in the indicated position, which is marked in the picture on the right\n")  
             self.eventPicture.show()
             
             self.playerThreeDropBlack = self.robot.getl()
             
             self.eventPicture.move(256+26*13,16+26*8)
-        elif self.stage==13:
+        elif self.stage==19:
             #self.eventText.clear()   
             self.coordinates = self.robot.getl()
             self.eventText.append("Set X: "+ str(self.coordinates[0]) + " \nSet Y: " + str(self.coordinates[1]) + " \nSet Z: " + str(self.coordinates[2])+"\n")
@@ -376,7 +376,7 @@ class InitScreenRobot(QDialog):
             self.playerThreeDropWhite = self.robot.getl()
              
             self.doneBtn.setText("DONE")
-        elif self.stage==14:
+        elif self.stage==20:
             
             self.WriteDataStructers()
             self.close() 
@@ -384,7 +384,54 @@ class InitScreenRobot(QDialog):
     #Writing in dataStructers.py    
     def WriteDataStructers(self):
         #Basic info Structers files
-        self.file = open("dataStructers.py", "a")
+        self.file = open("dataStructers.py", "w")
+        
+        self.file.write('camId = '+str(self.camId)+"/n")
+        self.file.write('import cv2\n')
+        self.file.write("picStruct = {'r':cv2.imread('images/Chess_tile_rd.png'),\n")
+        self.file.write("             'n':cv2.imread('images/Chess_tile_nd.png'),\n")
+        self.file.write("             'b':cv2.imread('images/Chess_tile_bd.png'),\n")
+        self.file.write("             'q':cv2.imread('images/Chess_tile_qd.png'),\n")
+        self.file.write("             'k':cv2.imread('images/Chess_tile_kd.png'),\n")
+        self.file.write("             'p':cv2.imread('images/Chess_tile_pd.png'),\n")
+        self.file.write("             'R':cv2.imread('images/Chess_tile_rl.png'),\n")
+        self.file.write("             'N':cv2.imread('images/Chess_tile_nl.png'),\n")
+        self.file.write("             'B':cv2.imread('images/Chess_tile_bl.png'),\n")
+        self.file.write("             'Q':cv2.imread('images/Chess_tile_ql.png'),\n")
+        self.file.write("             'K':cv2.imread('images/Chess_tile_kl.png'),\n")
+        self.file.write("             'P':cv2.imread('images/Chess_tile_pl.png')}\n")
+        self.file.write("\n")
+        self.file.write("figureGripStruc =  {'r':0.025,'n':0.01,'b':0.032,'k':0.05,'q':0.05,'p':0.004,\n")
+        self.file.write("                   'R':0.025,'N':0.01,'B':0.032,'K':0.05,'Q':0.05,'P':0.004}\n")
+        self.file.write("\n")
+        self.file.write("figuresDropWhitePos = {'R1':[0,0],'R2':[0,1],'N1':[0,2],'N2':[0,3],'B1':[0,4],'B2':[0,5],'Q':[0,6],'K':[0,7],\n")
+        self.file.write("                       'P1':[1,0],'P2':[1,1],'P3':[1,2],'P4':[1,3],'P5':[1,4],'P6':[1,5],'P7':[1,6],'P8':[1,7]}\n")
+        self.file.write("\n")
+        self.file.write("figuresDropBlackPos = {'r1':[0,0],'r2':[0,1],'n1':[0,2],'n2':[0,3],'b1':[0,4],'b2':[0,5],'q':[0,6],'k':[0,7],\n")
+        self.file.write("                       'p1':[1,0],'p2':[1,1],'p3':[1,2],'p4':[1,3],'p5':[1,4],'p6':[1,5],'p7':[1,6],'p8':[1,7]}\n")
+        self.file.write("\n")
+        self.file.write("boardStructure = ['a1','b1','c1','d1','e1','f1','g1','h1',\n")
+        self.file.write("                  'a2','b2','c2','d2','e2','f2','g2','h2',\n")
+        self.file.write("                  'a3','b3','c3','d3','e3','f3','g3','h3',\n")
+        self.file.write("                  'a4','b4','c4','d4','e4','f4','g4','h4',\n")
+        self.file.write("                  'a5','b5','c5','d5','e5','f5','g5','h5',\n")
+        self.file.write("                  'a6','b6','c6','d6','e6','f6','g6','h6',\n")
+        self.file.write("                  'a7','b7','c7','d7','e7','f7','g7','h7',\n")
+        self.file.write("                  'a8','b8','c8','d8','e8','f8','g8','h8']\n")
+        self.file.write("\n")
+        self.file.write("picStruct = {'r':cv2.resize(cv2.imread('images/Chess_tile_rd.png'),(50,50)),\n")
+        self.file.write("             'n':cv2.resize(cv2.imread('images/Chess_tile_nd.png'),(50,50)),\n")
+        self.file.write("             'b':cv2.resize(cv2.imread('images/Chess_tile_bd.png'),(50,50)),\n")
+        self.file.write("             'q':cv2.resize(cv2.imread('images/Chess_tile_qd.png'),(50,50)),\n")
+        self.file.write("             'k':cv2.resize(cv2.imread('images/Chess_tile_kd.png'),(50,50)),\n")
+        self.file.write("             'p':cv2.resize(cv2.imread('images/Chess_tile_pd.png'),(50,50)),\n")
+        self.file.write("             'R':cv2.resize(cv2.imread('images/Chess_tile_rl.png'),(50,50)),\n")
+        self.file.write("             'N':cv2.resize(cv2.imread('images/Chess_tile_nl.png'),(50,50)),\n")
+        self.file.write("             'B':cv2.resize(cv2.imread('images/Chess_tile_bl.png'),(50,50)),\n")
+        self.file.write("             'Q':cv2.resize(cv2.imread('images/Chess_tile_ql.png'),(50,50)),\n")
+        self.file.write("             'K':cv2.resize(cv2.imread('images/Chess_tile_kl.png'),(50,50)),\n")
+        self.file.write("             'P':cv2.resize(cv2.imread('images/Chess_tile_pl.png'),(50,50))}\n")
+        self.file.write("\n")
         
         if self.cntPlayer == 1:
             self.file.write("playerOneRfPt = " + str(self.playerOneRfPt) + "\n")
@@ -420,22 +467,22 @@ class InitScreenRobot(QDialog):
             self.file.write("figuresDropOneBlack = " + str(self.playerOneDropBlack) + "\n")
             self.file.write("playerOneJPose = " + str(self.playerOneJPose) + "\n")
             self.file.write("playerOneLPose = " + str(self.playerOneLPose) + "\n")
-            #self.file.write("playerOneJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
-            #self.file.write("playerOneJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
+            self.file.write("playerOneJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
+            self.file.write("playerOneJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
             
             self.file.write("figuresDropTwoWhite = " + str(self.playerOneDropWhite) + "\n")
             self.file.write("figuresDropTwoBlack = " + str(self.playerOneDropBlack) + "\n")
             self.file.write("playerTwoJPose = " + str(self.playerOneJPose) + "\n")
             self.file.write("playerTwoLPose = " + str(self.playerOneLPose) + "\n")
-            #self.file.write("playerTwoJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
-            #self.file.write("playerTwoJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
+            self.file.write("playerTwoJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
+            self.file.write("playerTwoJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
             
             self.file.write("figuresDropThreeWhite = " + str(self.playerOneDropWhite) + "\n")
             self.file.write("figuresDropThreeBlack = " + str(self.playerOneDropBlack) + "\n")
             self.file.write("playerThreeJPose = " + str(self.playerOneJPose) + "\n")
             self.file.write("playerThreeLPose = " + str(self.playerOneLPose) + "\n")
-            #self.file.write("playerThreeJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
-            #self.file.write("playerThreeJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
+            self.file.write("playerThreeJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
+            self.file.write("playerThreeJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
         
         #Write if count players more than 1
         elif self.cntPlayer == 2:
@@ -443,22 +490,22 @@ class InitScreenRobot(QDialog):
             self.file.write("figuresDropOneBlack = " + str(self.playerOneDropBlack) + "\n")
             self.file.write("playerOneJPose = " + str(self.playerOneJPose) + "\n")
             self.file.write("playerOneLPose = " + str(self.playerOneLPose) + "\n")
-            #self.file.write("playerOneJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
-            #self.file.write("playerOneJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
+            self.file.write("playerOneJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
+            self.file.write("playerOneJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
             
             self.file.write("figuresDropTwoWhite = " + str(self.playerTwoDropWhite) + "\n")
             self.file.write("figuresDropTwoBlack = " + str(self.playerTwoDropBlack) + "\n")
             self.file.write("playerTwoJPose = " + str(self.playerTwoJPose) + "\n")
             self.file.write("playerTwoLPose = " + str(self.playerTwoLPose) + "\n")
-            #self.file.write("playerTwoJleftLimit = " + str(self.playerTwoJleftLimit[0]) + "\n")
-            #self.file.write("playerTwoJrightLimit = " + str(self.playerTwoJrightLimit[0]) + "\n\n")
+            self.file.write("playerTwoJleftLimit = " + str(self.playerTwoJleftLimit[0]) + "\n")
+            self.file.write("playerTwoJrightLimit = " + str(self.playerTwoJrightLimit[0]) + "\n\n")
             
             self.file.write("figuresDropThreeWhite = " + str(self.playerTwoDropWhite) + "\n")
             self.file.write("figuresDropThreeBlack = " + str(self.playerTwoDropBlack) + "\n")
             self.file.write("playerThreeJPose = " + str(self.playerTwoJPose) + "\n")
             self.file.write("playerThreeLPose = " + str(self.playerTwoLPose) + "\n")
-            #self.file.write("playerThreeJleftLimit = " + str(self.playerTwoJleftLimit[0]) + "\n")
-            #self.file.write("playerThreeJrightLimit = " + str(self.playerTwoJrightLimit[0]) + "\n\n")
+            self.file.write("playerThreeJleftLimit = " + str(self.playerTwoJleftLimit[0]) + "\n")
+            self.file.write("playerThreeJrightLimit = " + str(self.playerTwoJrightLimit[0]) + "\n\n")
             
         #Write if count players = 3
         if self.cntPlayer == 3:
@@ -466,22 +513,22 @@ class InitScreenRobot(QDialog):
             self.file.write("figuresDropOneBlack = " + str(self.playerOneDropBlack) + "\n")
             self.file.write("playerOneJPose = " + str(self.playerOneJPose) + "\n")
             self.file.write("playerOneLPose = " + str(self.playerOneLPose) + "\n")
-            #self.file.write("playerOneJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
-            #self.file.write("playerOneJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
+            self.file.write("playerOneJleftLimit = " + str(self.playerOneJleftLimit[0]) + "\n")
+            self.file.write("playerOneJrightLimit = " + str(self.playerOneJrightLimit[0]) + "\n\n")
             
             self.file.write("figuresDropTwoWhite = " + str(self.playerTwoDropWhite) + "\n")
             self.file.write("figuresDropTwoBlack = " + str(self.playerTwoDropBlack) + "\n")
             self.file.write("playerTwoJPose = " + str(self.playerTwoJPose) + "\n")
             self.file.write("playerTwoLPose = " + str(self.playerTwoLPose) + "\n")
-            #self.file.write("playerTwoJleftLimit = " + str(self.playerTwoJleftLimit[0]) + "\n")
-            #self.file.write("playerTwoJrightLimit = " + str(self.playerTwoJrightLimit[0]) + "\n\n")
+            self.file.write("playerTwoJleftLimit = " + str(self.playerTwoJleftLimit[0]) + "\n")
+            self.file.write("playerTwoJrightLimit = " + str(self.playerTwoJrightLimit[0]) + "\n\n")
             
             self.file.write("figuresDropThreeWhite = " + str(self.playerThreeDropWhite) + "\n")
             self.file.write("figuresDropThreeBlack = " + str(self.playerThreeDropBlack) + "\n")
             self.file.write("playerThreeJPose = " + str(self.playerThreeJPose) + "\n")
             self.file.write("playerThreeLPose = " + str(self.playerThreeLPose) + "\n")
-            #self.file.write("playerThreeJleftLimit = " + str(self.playerThreeJleftLimit[0]) + "\n")
-            #self.file.write("playerThreeJrightLimit = " + str(self.playerThreeJrightLimit[0]) + "\n\n")
+            self.file.write("playerThreeJleftLimit = " + str(self.playerThreeJleftLimit[0]) + "\n")
+            self.file.write("playerThreeJrightLimit = " + str(self.playerThreeJrightLimit[0]) + "\n\n")
             
         
         self.file.close()
