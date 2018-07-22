@@ -1,43 +1,59 @@
 import urx
 import time
+import os
 robot = urx.Robot('192.168.0.20',use_rt=True)
 
 state1 =False
 state2= False
 state3= False
-
+file = open('status.txt','w')
+file.write('000')
+file.close()
 def check_button():
-    check1 = robot.get_digital_in(0)
+    check1 = robot.get_digital_in(2)
+    check2 = robot.get_digital_in(3)
+    check3 = robot.get_digital_in(4)
     if check1 ==True:
+        print('Button1')
         file = open('status.txt','r')
         data = file.read()
+        
+        some = '1'+data[1]+data[2] 
+        print('data',data)
+        print('some is ',some)
         file.close()
-        data[0]='1'
         file = open('status.txt','w')
-        file.write(data)
+        file.write(some)
         file.close()
-    check2 = robot.get_digital_in(1)
+    
     if check2 == True:
+        print('Button2')
         file = open('status.txt','r')
         data = file.read()
+        
+        some=data[0]+'1'+data[2]
+        print(some)
         file.close()
-        data[1]='1'
         file = open('status.txt','w')
-        file.write(data)
+        file.write(some)
         file.close()
-    check3 = robot.get_digital_in(2)
+    
     if check3 == True:
+        print('Button3')
         file = open('status.txt','r')
         data = file.read()
+        
+        some=data[0]+data[1]+'1'
+        print(some)
         file.close()
-        data[2]='1'
         file = open('status.txt','w')
-        file.write(data)
+        file.write(some)
         file.close()
-    time.sleep(0.5)
-if __name__ == __main__:
-    i = 0
-    while True:
+    
+    
+i = 0
+print(os.getcwd())
+while True:
         check_button()
         i+=1
         if i==10:

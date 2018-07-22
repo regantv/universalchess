@@ -78,7 +78,7 @@ class MainGame(QWidget):
 #         if GenerateMoveDone[0]==True:
 #             self.robot.set_digital_out(dataStructers.led_flash, True)
 #             
-#             if     == True:
+#             if self.robot.get_digital_in(0) == True:
 #                 
 #         else:
 #             self.robot.set_digital_out(dataStructers.led_flash, False)
@@ -473,7 +473,7 @@ class MainGame(QWidget):
         currentPlayer = self.curPlayer[0]
         self.robot.set_digital_out(dataStructers.led_red,False)
         self.robot.set_digital_out(dataStructers.led_blue,False)
-        self.CheckPermission[currentPlayer]=False
+        #self.CheckPermission[currentPlayer]=False
         
         
         
@@ -486,8 +486,6 @@ class MainGame(QWidget):
             if self.gainedData.count("+")==1:
                 #c = self.gainedData[-1]
                 c = FindPosiblePromotion(self.playerStatus[self.curPlayer[0]][0],self.gainedData[-1])
-                if c is None:
-                    c =''
                 b = int(self.gainedData[self.gainedData.find("-")+1:self.gainedData.find("+")])
                 uci = square2Uci(a)+square2Uci(b)+c
             else:
@@ -555,10 +553,6 @@ class MainGame(QWidget):
             #print('Current turn',BoardTurn(self.playerStatus[self.curPlayer[0]][0]))
             
             if self.GenerateMoveDone[currentPlayer]:
-                
-                self.robot.set_digital_out(dataStructers.OutButtonOne,True)
-                self.robot.set_digital_out(dataStructers.OutButtonTwo,True)
-                self.robot.set_digital_out(dataStructers.OutButtonThree,True)
                 '''
                     If move Generation from player or Ai is finished, than game may be continued
                 '''
@@ -614,18 +608,21 @@ class MainGame(QWidget):
                             #print('player Move')
                             while True:
                                 file = open('status.txt','r')
-                                self.CheckPermission= file.read()
+                                self.CheckPermission = file.read()
                                 file.close()
                                 if len(self.CheckPermission)==3:
                                     break
-                            
                             if self.CheckPermission[self.curPlayer[0]]=='1':
                                 
-                                self.CheckPermission[self.curPlayer[0]] = '0'
+                                if self.curPlayer[0] ==0:
+                                    data = '0'+self.CheckPermission[1]+self.CheckPermission[2]
+                                elif self.curPlayer[0] ==1:
+                                    data = self.CheckPermission[0]+'0'+self.CheckPermission[2]
+                                elif self.curPlayer[0] ==2:
+                                    data = self.CheckPermission[0]+self.CheckPermission[1] +'0'
                                 file = open('status.txt','w')
-                                file.write(self.CheckPermission)
+                                file.write(data)
                                 file.close()
-                                
                                 self.robot.set_digital_out(2+currentPlayer,False)
                                 self.GenerateMoveDone[currentPlayer] = False
                                 #print('1111111111111111111111111111')
@@ -634,6 +631,7 @@ class MainGame(QWidget):
                                 checkPlayer.start()
                                 #print('222222222222222')
                                 
+                                #self.CheckPermission[self.curPlayer[0]] = False
                             else:
                                 if self.playersNum>1:
             
@@ -673,25 +671,18 @@ class MainGame(QWidget):
                             
                     if BoardTurn(self.playerStatus[self.curPlayer[0]][0]) =='b':
                     #print('Black Move')
-                        self.curTurn[currentPlayer].setText('Current\n Turn:\n Black')
-                        
-                        self.GenerateMoveDone[currentPlayer] = False
-                        #self.robot.set_digital_out(2+currentPlayer,False)
-                        self.robot.set_digital_out(dataStructers.OutButtonOne,False)
-                        self.robot.set_digital_out(dataStructers.OutButtonTwo,False)
-                        self.robot.set_digital_out(dataStructers.OutButtonThree,False)
-                        
-                        #print(' Robot Move')
-                        gameThread1 = GameLoop(self.playerStatus[currentPlayer][0],self.playerStatus[currentPlayer][3],self.engine,currentPlayer)
-                        gameThread1.dataSignal[str].connect(self.GainDataFromThread)
-                        gameThread1.doneSignal[int].connect(self.LoopThreadDone)
-                        self.robot.set_digital_out(dataStructers.led_blue,True)
-                        if gameThread1.isFinished:
-                            gameThread1.start()
-                        #self.robot.set_digital_out(2+currentPlayer,False)
-                        self.robot.set_digital_out(dataStructers.OutButtonOne,False)
-                        self.robot.set_digital_out(dataStructers.OutButtonTwo,False)
-                        self.robot.set_digital_out(dataStructers.OutButtonThree,False)
+                            self.curTurn[currentPlayer].setText('Current\n Turn:\n Black')
+                            
+                            self.GenerateMoveDone[currentPlayer] = False
+                            self.robot.set_digital_out(2+currentPlayer,False)
+                            #print(' Robot Move')
+                            gameThread1 = GameLoop(self.playerStatus[currentPlayer][0],self.playerStatus[currentPlayer][3],self.engine,currentPlayer)
+                            gameThread1.dataSignal[str].connect(self.GainDataFromThread)
+                            gameThread1.doneSignal[int].connect(self.LoopThreadDone)
+                            self.robot.set_digital_out(dataStructers.led_blue,True)
+                            if gameThread1.isFinished:
+                                gameThread1.start()
+                            self.robot.set_digital_out(2+currentPlayer,False)
 #                     
 #             if self.playersNum==1:
 #                     self.curPlayer[0]=0
@@ -737,11 +728,8 @@ class MainGame(QWidget):
             if self.playerStatus[self.curInt-1][1]:
                 self.robot.set_digital_out(2+self.curInt-1,True)
             else:
-                #self.robot.set_digital_out(2+self.curInt-1,False)
-                self.robot.set_digital_out(dataStructers.OutButtonOne,False)
-                self.robot.set_digital_out(dataStructers.OutButtonTwo,False)
-                self.robot.set_digital_out(dataStructers.OutButtonThree,False)
-    self.curInt+=1
+                self.robot.set_digital_out(2+self.curInt-1,False)
+        self.curInt+=1
             
     def RestartOne(self):
         #self.playerStatus[0][0] = chess.Board()   
@@ -820,26 +808,28 @@ class MainGame(QWidget):
                 
         
     def ButtonPushed(self,player):
-        self.CheckPermission[player]=True
+        pass
+        #self.CheckPermission[player]=True
     def checkButtons(self):
-        print ('lets check button in game.py')
-        if self.robot.get_digital_in(dataStructers.InButtonOne) == True:
-            print ('Button for player one')
-            self.CheckPermission[0]=True
-        elif self.robot.get_digital_in(dataStructers.InButtonTwo) == True:
-            print ('button for player two')
-            self.CheckPermission[1]=True
-        elif self.robot.get_digital_in(dataStructers.InButtonThree) == True:
-            print ('button for player three')
-            self.CheckPermission[2]=True  
-    #def EmitSignal(self,event,signal, value):
-    #    buttonCheckEvent = event
-    #    if value == int:
-    #        buttonCheckEvent.doneSignal[int].connect(signal)
-    #    elif value == str:
-    #        buttonCheckEvent.doneSignal[str].connect(signal)
-    #    buttonCheckEvent.start()
-    
+        pass
+       # print ('lets check button in game.py')
+       # if self.robot.get_digital_in(dataStructers.InButtonOne) == True:
+       #     print ('Button for player one')
+       #     self.CheckPermission[0]=True
+       # elif self.robot.get_digital_in(dataStructers.InButtonTwo) == True:
+       #     print ('button for player two')
+       #     self.CheckPermission[1]=True
+       # elif self.robot.get_digital_in(dataStructers.InButtonThree) == True:
+        #    print ('button for player three')
+       #     self.CheckPermission[2]=True  
+        #def EmitSignal(self,event,signal, value):
+        #    buttonCheckEvent = event
+        #    if value == int:
+        #        buttonCheckEvent.doneSignal[int].connect(signal)
+        #    elif value == str:
+        #        buttonCheckEvent.doneSignal[str].connect(signal)
+        #    buttonCheckEvent.start()
+        
     def GameLoop(self):
         
         self.playerStatus =[]
@@ -881,10 +871,10 @@ class MainGame(QWidget):
         self.timer.setInterval(300)
         self.timer.start(1)   
         
-        #self.timer2 = QtCore.QTimer()
-        #self.timer2.timeout.connect(self.checkButtons)
-        #self.timer2.setInterval(300)
-        #self.timer2.start(1)
+        self.timer2 = QtCore.QTimer()
+        self.timer2.timeout.connect(self.checkButtons)
+        self.timer2.setInterval(300)
+        self.timer2.start(1)
         
             
                     
