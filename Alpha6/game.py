@@ -78,7 +78,7 @@ class MainGame(QWidget):
 #         if GenerateMoveDone[0]==True:
 #             self.robot.set_digital_out(dataStructers.led_flash, True)
 #             
-#             if self.robot.get_digital_in(0) == True:
+#             if     == True:
 #                 
 #         else:
 #             self.robot.set_digital_out(dataStructers.led_flash, False)
@@ -486,6 +486,8 @@ class MainGame(QWidget):
             if self.gainedData.count("+")==1:
                 #c = self.gainedData[-1]
                 c = FindPosiblePromotion(self.playerStatus[self.curPlayer[0]][0],self.gainedData[-1])
+                if c is None:
+                    c =''
                 b = int(self.gainedData[self.gainedData.find("-")+1:self.gainedData.find("+")])
                 uci = square2Uci(a)+square2Uci(b)+c
             else:
@@ -610,8 +612,19 @@ class MainGame(QWidget):
                             main human iteraction event
                             '''
                             #print('player Move')
+                            while True:
+                                file = open('status.txt','r')
+                                self.CheckPermission= file.read()
+                                file.close()
+                                if len(self.CheckPermission)==3:
+                                    break
                             
-                            if self.CheckPermission[self.curPlayer[0]]:
+                            if self.CheckPermission[self.curPlayer[0]]=='1':
+                                
+                                self.CheckPermission[self.curPlayer[0]] = '0'
+                                file = open('status.txt','w')
+                                file.write(self.CheckPermission)
+                                file.close()
                                 
                                 self.robot.set_digital_out(2+currentPlayer,False)
                                 self.GenerateMoveDone[currentPlayer] = False
@@ -620,7 +633,7 @@ class MainGame(QWidget):
                                 checkPlayer.result[str].connect(self.PlayerCheckDone)
                                 checkPlayer.start()
                                 #print('222222222222222')
-                                self.CheckPermission[self.curPlayer[0]] = False
+                                
                             else:
                                 if self.playersNum>1:
             
@@ -801,16 +814,9 @@ class MainGame(QWidget):
             #print('init done')  
         elif self.initDone ==False and self.GenerateMoveDone[self.curInt]:
                 
-                #print(' Init  photo',self.curInt)       
-                self.GenerateMoveDone[self.curInt] = False
-                if self.playerStatus[self.curInt][0].fen() == 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1':
-                    makeFirstPhotoEvent = CheckBoard(self.curInt,self.playerStatus[self.curInt][0],self.robot,self.camera,1)
-                    makeFirstPhotoEvent.result[str].connect(self.initPhotoDone)
-                    makeFirstPhotoEvent.start()
-                else:
-                    makeFirstPhotoEvent = CheckBoard(self.curInt,self.playerStatus[self.curInt][0],self.robot,self.camera,3)
-                    makeFirstPhotoEvent.result[str].connect(self.initPhotoDone)
-                    makeFirstPhotoEvent.start()
+                makeFirstPhotoEvent = CheckBoard(self.curInt,self.playerStatus[self.curInt][0],self.robot,self.camera,1)
+                makeFirstPhotoEvent.result[str].connect(self.initPhotoDone)
+                makeFirstPhotoEvent.start()
                 
         
     def ButtonPushed(self,player):
@@ -875,10 +881,10 @@ class MainGame(QWidget):
         self.timer.setInterval(300)
         self.timer.start(1)   
         
-        self.timer2 = QtCore.QTimer()
-        self.timer2.timeout.connect(self.checkButtons)
-        self.timer2.setInterval(300)
-        self.timer2.start(1)
+        #self.timer2 = QtCore.QTimer()
+        #self.timer2.timeout.connect(self.checkButtons)
+        #self.timer2.setInterval(300)
+        #self.timer2.start(1)
         
             
                     
