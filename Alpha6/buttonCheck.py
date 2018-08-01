@@ -17,10 +17,12 @@ def check_button():
         print('Button1')
         file = open('status.txt','r')
         data = file.read()
-        
-        some = '1'+data[1]+data[2] 
-        print('data',data)
-        print('some is ',some)
+        if len(data)=3:
+            some = '1'+data[1]+data[2] 
+        else:
+            some ='100'
+        #print('data',data)
+        #print('some is ',some)
         file.close()
         file = open('status.txt','w')
         file.write(some)
@@ -30,8 +32,11 @@ def check_button():
         print('Button2')
         file = open('status.txt','r')
         data = file.read()
-        
-        some=data[0]+'1'+data[2]
+        if len(data)=3:
+            
+            some=data[0]+'1'+data[2]
+        else:
+            some = '010'
         print(some)
         file.close()
         file = open('status.txt','w')
@@ -42,8 +47,10 @@ def check_button():
         print('Button3')
         file = open('status.txt','r')
         data = file.read()
-        
-        some=data[0]+data[1]+'1'
+        if len(data)=3:
+            some=data[0]+data[1]+'1'
+        else:
+            some = '001'
         print(some)
         file.close()
         file = open('status.txt','w')
